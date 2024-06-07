@@ -63,6 +63,11 @@ variable "re_cluster_password" {
     default     = "admin"
 }
 
+variable "re_license" {
+  description = "Redis Enterprise license"
+  default     = ""
+}
+
 ################# Envoy concurrency settings
 
 variable "update_envoy_concurrency" {

@@ -7,5 +7,6 @@ pause_seconds: 15
 flash_path: /var/opt/redislabs/flash
 flash_enabled: ${flash_enabled}
 rack_awareness: ${rack_awareness}
+re_license: ${re_license}
 update_envoy_concurrency: ${update_envoy_concurrency }
 envoy_concurrency_setting: ${envoy_concurrency_setting}

@@ -159,6 +159,7 @@ module "create-cluster" {
   re_cluster_password  = var.re_cluster_password
   flash_enabled        = var.flash_enabled
   rack_awareness       = var.rack_awareness
+  re_license           = var.re_license
   update_envoy_concurrency = var.update_envoy_concurrency
   envoy_concurrency_setting = var.envoy_concurrency_setting
 

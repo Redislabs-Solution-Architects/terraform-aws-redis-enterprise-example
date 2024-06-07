@@ -80,7 +80,10 @@ variable "rack_awareness" {
   default     = false
 }
 
-
+variable "re_license" {
+  description = "Redis Enterprise license"
+  default     = ""
+}
 variable "data-node-count" {
   description = "number of data nodes"
   default     = 3
