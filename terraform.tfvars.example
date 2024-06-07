@@ -7,6 +7,7 @@
 #### (fake example: aws_creds = ["myAccesssKeyxjdklfdakf","MySecretKeyxkldkfhadjkfh"]) 
 aws_creds =
 
+
 #### User Input Required
 #### name of ssh key (.pem file) to be added to instance (AWS key pair name)
 #### ie. if your AWS ssh keys name is "my-ssh-key.pem", enter in "my-ssh-key"
@@ -78,6 +79,19 @@ flash_enabled = false
 #### Do you want a Rack Zone Aware enabled cluster, if so, true, else, false
 #### example: rack_awareness = false
 rack_awareness = false
+
+### Do you have a license to set up on the cluster?
+# example(fake): re_license = <<-EOT
+# ----- LICENSE START -----
+# QaMWYIuuz6FG/Kn3ZNhRgFhDRRQOCZqB0JfjDwG2QXaWfdWynV6yMLTjb56H
+# QQatb6JaOC7uaEefmyONcY52ECE+HqSnUkq5taeeSwCpwZ5WnGfDRRsEJAAz
+# LXdeZlkjlkjlkjlkjlkjlkjlkjlkjlkjQ1bdDMZqtwFUQfAk7HmwJLgIIt
+# /7+geSRjTSFV+xOz1ba7Up5l6zIle84bDHn4n/rcnjtrTpO9A2POySpRyp5v
+# yPLgV4UIasjHJFlkjlkjlkjlkjlkjlkjlkjlkjlkjlklkjlkjeoF8SrK8DiC
+# LhYfF1zrTmTZvZURJ37lvRvK6oA9mjrhlgov4x796g==
+# ----- LICENSE END -----
+# EOT
+re_license = ""
 
 #### how many data nodes, 3 minimum, (odd numbers required)
 #### example: data-node-count = 3

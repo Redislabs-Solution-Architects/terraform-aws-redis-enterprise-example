@@ -21,6 +21,9 @@ resource "local_file" "group_vars_main_yaml" {
     content  = templatefile("${path.module}//group_vars/all/main.yaml.tpl", {
       flash_enabled  = var.flash_enabled
       rack_awareness = var.rack_awareness
+      re_license = replace(var.re_license, "\n", "\\n")
+      update_envoy_concurrency = var.update_envoy_concurrency
+      envoy_concurrency_setting = var.envoy_concurrency_setting
     })
     filename = "${path.module}/group_vars/all/main.yaml"
 }

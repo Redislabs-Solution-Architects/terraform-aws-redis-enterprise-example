@@ -33,3 +33,19 @@ override.tf.json
 # example: *tfplan*
 terraform.tfvars
 terraform.lock.hcl
+
+# databases config
+re_databases.json
+
+# ignore dynamically created inventory files
+*.ini
+terraform.txt
+.terraform.lock.hcl
+
+# ignore dynamic files to avoid confusion
+modules/nodes-config-re/ansible/playbooks/playbook_re_node.yaml
+modules/re-cluster/group_vars/all/main.yaml
+modules/re-databases/extra_vars/databases.yaml
+modules/re-cluster/extra_vars/*-cluster_inventory.yaml
+modules/prometheus-node/ansible/roles/grafana-datasource/defaults/main.yml
+modules/prometheus-node/ansible/playbooks/playbook_grafana_dashboard.yaml
