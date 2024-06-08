@@ -1,5 +1,5 @@
 Host *
-  User ubuntu
+  User ${ssh_user}
   IdentityFile ~/.ssh/${vpc_name}.pem
   ForwardAgent yes
   GSSAPIAuthentication no

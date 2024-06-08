@@ -31,7 +31,7 @@ resource "local_file" "group_vars_main_yaml" {
 ##### Generate extra_vars.yaml file
 resource "local_file" "extra_vars" {
     content  = templatefile("${path.module}/extra_vars/inventory.yaml.tpl", {
-      ansible_user        = "ubuntu"
+      ansible_user        = var.ssh_user
       dns_fqdn            = var.dns_fqdn
       re_cluster_username = var.re_cluster_username
       re_cluster_password = var.re_cluster_password

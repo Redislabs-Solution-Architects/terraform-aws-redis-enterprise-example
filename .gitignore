@@ -49,3 +49,4 @@ modules/re-databases/extra_vars/databases.yaml
 modules/re-cluster/extra_vars/*-cluster_inventory.yaml
 modules/prometheus-node/ansible/roles/grafana-datasource/defaults/main.yml
 modules/prometheus-node/ansible/playbooks/playbook_grafana_dashboard.yaml
+modules/nodes-config-re/ansible/playbooks/default.yaml

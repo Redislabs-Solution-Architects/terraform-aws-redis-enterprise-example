@@ -66,6 +66,12 @@ resource "local_file" "playbook_setup" {
   #depends_on = [aws_instance.re_cluster_instance, aws_eip_association.re-eip-assoc, aws_volume_attachment.ephemeral_re_cluster_instance]
 }
 
+resource "local_file" "default_yaml" {
+   content = file("${path.module}/ansible/playbooks/${var.os_family}/default.yaml")
+   filename = "${path.module}/ansible/playbooks/default.yaml"
+}
+
+
 #### Generate Ansible Inventory for each node
 resource "local_file" "inventory-setup" {
     count    = var.data-node-count
@@ -81,6 +87,7 @@ resource "local_file" "inventory-setup" {
 resource "local_file" "ssh-setup" {
     content  = templatefile("${path.module}/ansible/config/ssh.tpl", {
         vpc_name = var.vpc_name
+        ssh_user = var.ssh_user
     })
     filename = "/tmp/${var.vpc_name}_node.cfg"
   #depends_on = [aws_instance.re_cluster_instance, aws_eip_association.re-eip-assoc, aws_volume_attachment.ephemeral_re_cluster_instance]

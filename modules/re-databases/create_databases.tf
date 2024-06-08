@@ -15,7 +15,7 @@ resource "local_file" "dynamic_inventory_ini" {
 ##### Generate extra_vars.yaml file
 resource "local_file" "extra_vars" {
     content  = templatefile("${path.module}/extra_vars/databases.yaml.tpl", {
-      ansible_user        = "ubuntu"
+      ansible_user        = var.ssh_user
       re_cluster_username = var.re_cluster_username
       re_cluster_password = var.re_cluster_password
       re_databases_create  = var.re_databases_create

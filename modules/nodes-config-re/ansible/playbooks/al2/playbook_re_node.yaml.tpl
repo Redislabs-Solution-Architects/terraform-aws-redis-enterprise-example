@@ -8,6 +8,15 @@
 
 
   pre_tasks:
+  - name: Update YUM Cache
+    yum:
+      update_cache: yes
+      
+  - name: Upgrade all packages
+    yum:
+      name: "*"
+      state: latest
+
   - name: Load vars
     include_vars: "{{ item }}"
     with_first_found:
