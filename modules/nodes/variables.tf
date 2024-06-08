@@ -87,3 +87,14 @@ variable "ebs-volume-size" {
   description = "The size of the ephemeral and persistent volumes to attach"
   default     = "150"
 }
+
+###### AMI Defaults
+variable "re_ami_name" {
+    description = "AMI name to use for nodes. "
+    default = "amzn2-ami-amd-hvm-2.0.20220606.1-x86_64-gp2"
+}
+
+variable "re_ami_owner" {
+    description = "AMI Owner"
+    default = "137112412989"
+}

@@ -88,6 +88,8 @@ module "nodes-re" {
     vpc_name           = module.vpc.vpc-name
     vpc_subnets_ids    = module.vpc.subnet-ids
     vpc_id             = module.vpc.vpc-id
+    re_ami_name         = var.re_ami_name
+    re_ami_owner       = var.re_ami_owner
 
     depends_on = [
       module.vpc,
@@ -117,8 +119,11 @@ module "nodes-config-re" {
 
     ssh_key_name       = var.ssh_key_name
     ssh_key_path       = var.ssh_key_path
+    ssh_user           = var.ssh_user
     re_download_url    = var.re_download_url
     data-node-count    = var.data-node-count
+    os_family          = var.os_family
+  
     ### vars pulled from previous modules
     ## from vpc module outputs 
     vpc_name           = module.vpc.vpc-name
@@ -205,112 +210,4 @@ module "create-databases" {
   depends_on           = [
     module.create-cluster
     ]
-}
-
-
-
-####################################
-########### Node Module
-#### Create Test nodes
-#### Create the test nodes and their associated infra
-#### configure them and install RE in the config module.
-module "nodes-tester" {
-    source             = "./modules/nodes"
-
-    owner              = var.owner
-    region             = var.region
-    vpc_cidr           = var.vpc_cidr
-    subnet_azs         = var.subnet_azs
-    ssh_key_name       = var.ssh_key_name
-    ssh_key_path       = var.ssh_key_path
-    node-count         = var.test-node-count
-    node-prefix        = var.node-prefix-tester
-    ec2_instance_type  = var.test_instance_type
-    #ebs-volume-size    = var.re-volume-size
-    create_ebs_volumes = var.create_ebs_volumes_tester
-    ### vars pulled from previous modules
-    security_group_id  = module.security-group.aws_security_group_id
-    ## from vpc module outputs 
-    vpc_name           = module.vpc.vpc-name
-    vpc_subnets_ids    = module.vpc.subnet-ids
-    vpc_id             = module.vpc.vpc-id
-
-    depends_on = [
-      module.vpc,
-      module.security-group
-    ]
-}
-
-#### Node Outputs to use in future modules
-output "test-node-eips" {
-  value = module.nodes-tester.node-eips
-}
-
-output "test-node-internal-ips" {
-  value = module.nodes-tester.node-internal-ips
-}
-
-output "test-node-eip-public-dns" {
-  value = module.nodes-tester.node-eip-public-dns
-}
-
-
-#### Create Test nodes
-#### Ansible playbooks configure Test node with Redis and Memtier
-module "nodes-config-redisoss" {
-    source             = "./modules/nodes-config-redisoss"
-
-    ssh_key_name       = var.ssh_key_name
-    ssh_key_path       = var.ssh_key_path
-    test_instance_type = var.test_instance_type
-    test-node-count    = var.test-node-count
-    ### vars pulled from previous modules
-    ## from vpc module outputs 
-    vpc_name           = module.vpc.vpc-name
-    vpc_id             = module.vpc.vpc-id
-    aws_eips           = module.nodes-tester.node-eips
-
-    depends_on = [
-      module.nodes-tester
-    ]
-}
-
-
-######## Prometheus and Grafana Module
-### configure prometheus and grafana on TEST node
-######## IF YOU DONT WANT A GRAFANA ON THE NODE, Comment out this module and its outputs
-module "prometheus-node" {
-    source             = "./modules/prometheus-node"
-    
-    ssh_key_name       = var.ssh_key_name
-    ssh_key_path       = var.ssh_key_path
-    test-node-count    = var.test-node-count
-    ### vars pulled from previous modules
-    ## from vpc module outputs 
-    vpc_name           = module.vpc.vpc-name
-    vpc_id             = module.vpc.vpc-id
-    aws_eips           = module.nodes-tester.node-eips
-    
-    prometheus_instance_type = var.test_instance_type
-    dns_fqdn           = module.dns.dns-ns-record-name
-
-
-    depends_on = [module.vpc, 
-                  module.nodes-tester,
-                  module.nodes-config-redisoss,
-                  module.dns, 
-                  module.create-cluster]
-}
-
-#### dns FQDN output used in future modules
-output "grafana_url" {
-  value = module.prometheus-node.grafana_url
-}
-
-output "grafana_username" {
-  value = "admin"
-}
-
-output "grafana_password" {
-  value = "secret"
 }

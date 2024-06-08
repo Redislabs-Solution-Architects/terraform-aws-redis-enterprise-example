@@ -1,0 +1,18 @@
+yum_packages:
+- jq
+- tree
+- sysstat
+- iputils
+- libcap
+- gcc
+- gcc-c++
+- autoconf
+- automake
+- libbsd
+- libtool
+- pcre
+- libevent
+- pkgconfig
+- zlib-devel
+- openssl-devel
+- ntp

@@ -16,6 +16,10 @@ variable "ssh_key_path" {
     description = "name of ssh key to be added to instance"
 }
 
+variable "ssh_user" {
+  description = "The default username to connect to the nodes.  The default AMI is AL2 so it will be set to ec2-user. If ubuntu AMI is being used change to 'ubuntu'"
+  default = "ec2-user"
+}
 variable "owner" {
     description = "owner tag name"
 }
@@ -48,26 +52,11 @@ variable "dns_hosted_zone_id" {
     description = "DNS hosted zone Id"
 }
 
-#### Test Instance Variables
-variable "test-node-count" {
-  description = "number of data nodes"
-  default     = 1
-}
-
-variable "node-prefix-tester" {
-  description = "node prefix"
-  default     = "tester"
-}
-
-variable "test_instance_type" {
-    description = "instance type to use. Default: t3.micro"
-    default = "t3.micro"
-}
 
 #### Redis Enterprise Cluster Variables
 variable "re_download_url" {
   description = "re download url"
-  default     = ""
+  default     = "https://s3.amazonaws.com/redis-enterprise-software-downloads/7.4.2/redislabs-7.4.2-129-amzn2-x86_64.tar"
 }
 
 variable "flash_enabled" {
@@ -116,11 +105,6 @@ variable "create_ebs_volumes_re" {
   default     = true
 }
 
-variable "create_ebs_volumes_tester" {
-  description = "Whether to create EBS volume or not"
-  type        = bool
-  default     = false
-}
 
 #### EBS volume for persistent and ephemeral storage
 variable "re-volume-size" {
@@ -304,27 +288,6 @@ variable "internal-rules" {
       to_port   = "65535"
       protocol  = "udp"
       comment   = "Let UDP out to the VPC"
-    },
-    {
-      type      = "ingress"
-      from_port = "8080"
-      to_port   = "8080"
-      protocol  = "tcp"
-      comment   = "Allow for host check between nodes (also for grafana access)"
-    },
-    {
-      type      = "ingress"
-      from_port = "9090"
-      to_port   = "9090"
-      protocol  = "tcp"
-      comment   = "For Grafana Access"
-    },
-    {
-      type      = "ingress"
-      from_port = "3000"
-      to_port   = "3000"
-      protocol  = "tcp"
-      comment   = "For Grafana Access"
     }
     
   ]
@@ -371,12 +334,6 @@ variable "envoy_concurrency_setting" {
   default = 2
 }
 
-####### Prometheus Node Variables
-
-variable "prometheus_instance_type" {
-    description = "instance type to use. Default: t3.micro"
-    default = "t3.micro"
-}
 
 
 ####### Node Output Variables
@@ -388,15 +345,24 @@ variable "vpc_security_group_ids" {
     default = []
 }
 
-variable "re_ami" {
-    description = "."
-    default = ""
+variable "os_family" {
+  description =  ""
+  type = string
+  default = "al2"
+  validation {
+    condition = contains(["ubuntu", "al2"], var.os_family)
+    error_message = "Must be either \"ubuntu\" or \"al2\"."
+  }
 }
 
-variable "test-node-eips" {
-    type = list
-    description = "."
-    default = []
+variable "re_ami_name" {
+    description = "AMI name to use for nodes. "
+    default = "amzn2-ami-amd-hvm-2.0.20220606.1-x86_64-gp2"
+}
+
+variable "re_ami_owner" {
+    description = "AMI Owner"
+    default = "137112412989"
 }
 
 

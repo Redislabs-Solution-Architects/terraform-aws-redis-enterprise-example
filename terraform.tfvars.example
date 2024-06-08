@@ -53,22 +53,12 @@ subnet_cidr_blocks = ["10.0.0.0/24","10.0.16.0/24","10.0.32.0/24"]
 #### example: subnet_azs = ["us-west-2a","us-west-2b","us-west-2c"]
 subnet_azs = ["us-west-2a","us-west-2b","us-west-2c"]
 
-############### Test Instance Variables
-
-#### instance type to use for test node with redis and memtier installed on it
-#### example: test_instance_type = "t3.micro"
-test_instance_type = "t3.micro"
-
-#### how many test nodes
-#### If you want a Tester node configured with redis and memtier, say 1 or greater, else say 0
-#### example: test-node-count = 1
-test-node-count = 1
 
 ############## Redis Enterprise Nodes Variables
 
 #### User Input Required
-#### RE Software download url (MUST BE ubuntu 18.04)
-#### (FAKE example (update the x.x.xx with the Redis Software version!): re_download_url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/x.x.xx/redislabs-x.x.xx-68-bionic-amd64.tar")
+#### RE Software download url (MUST align with os_family)
+#### (FAKE example (update the x.x.xx with the Redis Software version!): re_download_url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/x.x.xx/redislabs-x.xx.2-129-amzn2-x86_64.tar")
 re_download_url =
 
 #### RE cluster options
@@ -105,7 +95,6 @@ re_instance_type = "t2.xlarge"
 ##### EBS volume creation yes or no, true false
 create_ebs_volumes_re = true
 
-create_ebs_volumes_tester = false
 
 ##### EBS volume for persistent and ephemeral storage
 #### example: re-volume-size = 150

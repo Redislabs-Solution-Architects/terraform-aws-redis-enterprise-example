@@ -26,12 +26,12 @@ resource "null_resource" "remote-config" {
   # Provisioner block for remote-exec
   provisioner "remote-exec" {
     # Command to run on the remote node
-    inline = ["sudo apt update > /dev/null"]
+    inline = [ var.os_family == "ubuntu" ? "sudo apt update > /dev/null" : "sudo yum update -y > /dev/null"]
 
     # SSH connection details
     connection {
       type        = "ssh"
-      user        = "ubuntu"
+      user        = var.ssh_user
       private_key = file(var.ssh_key_path)
       host        = element(var.aws_eips, count.index)
     }
@@ -59,7 +59,7 @@ resource "time_sleep" "wait_30_seconds_re" {
 #### Generate Ansible Playbook
 resource "local_file" "playbook_setup" {
     count    = var.data-node-count
-    content  = templatefile("${path.module}/ansible/playbooks/playbook_re_node.yaml.tpl", {
+    content  = templatefile("${path.module}/ansible/playbooks/${var.os_family}/playbook_re_node.yaml.tpl", {
         re_download_url  = var.re_download_url
     })
     filename = "${path.module}/ansible/playbooks/playbook_re_node.yaml"
