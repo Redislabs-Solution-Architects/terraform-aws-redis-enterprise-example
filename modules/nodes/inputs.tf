@@ -6,7 +6,7 @@ data "aws_ami" "ami" {
     values = [var.re_ami_name]
   }
 
-  owners = ["137112412989"]
+  owners = [var.re_ami_owner]
 
   filter {
     name   = "root-device-type"

@@ -88,7 +88,7 @@ module "nodes-re" {
     vpc_name           = module.vpc.vpc-name
     vpc_subnets_ids    = module.vpc.subnet-ids
     vpc_id             = module.vpc.vpc-id
-    re_ami_name         = var.re_ami_name
+    re_ami_name        = var.re_ami_name
     re_ami_owner       = var.re_ami_owner
 
     depends_on = [
@@ -165,6 +165,7 @@ module "create-cluster" {
   flash_enabled        = var.flash_enabled
   rack_awareness       = var.rack_awareness
   re_license           = var.re_license
+  ssh_user             = var.ssh_user
   update_envoy_concurrency = var.update_envoy_concurrency
   envoy_concurrency_setting = var.envoy_concurrency_setting
 
@@ -201,7 +202,8 @@ module "create-databases" {
   source               = "./modules/re-databases"
 
   ssh_key_path         = var.ssh_key_path
-  re_master_node   =  module.nodes-re.node-eip-public-dns[0]
+  ssh_user             = var.ssh_user
+  re_master_node       =  module.nodes-re.node-eip-public-dns[0]
   re_cluster_username  = var.re_cluster_username
   re_cluster_password  = var.re_cluster_password
   re_databases_create  = var.re_databases_create

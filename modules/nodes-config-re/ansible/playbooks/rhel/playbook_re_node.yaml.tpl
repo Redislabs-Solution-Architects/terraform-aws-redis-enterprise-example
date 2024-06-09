@@ -5,37 +5,6 @@
   become_method: sudo
   gather_facts: yes
 
-#  pre_tasks:
-
-#    - name: Update Package Cache
-#      dnf:
-#        name: '*'
-#        state: latest
-#        update_cache: yes
-#        use_backend: yum
-
-#    - name: Install packages
-#      dnf:
-#        state: present
-#        name
-#          - jq
-#          - tree
-#          - sysstat
-#          - iputils
-#          - libcap
-#          - gcc
-#          - gcc-c++
-#          - autoconf
-#          - automake
-#          - libbsd
-#          - libtool
-#          - pcre
-#          - libevent
-#          - pkgconfig
-#          - zlib-devel
-#          - openssl-devel
-#          - ntp
-
   tasks:
     - name: Create re home dir
       file:

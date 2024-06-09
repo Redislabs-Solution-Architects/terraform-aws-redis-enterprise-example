@@ -5,7 +5,6 @@ variable "ssh_key_path" {
 
 variable "ssh_user" {
   description = "The default username to connect to the nodes.  The default AMI is AL2 so it will be set to ec2-user. If ubuntu AMI is being used change to 'ubuntu'"
-  default = "ec2-user"
 }
 
 variable "re_master_node" {

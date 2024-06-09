@@ -9,8 +9,7 @@ variable "ssh_key_path" {
 }
 
 variable "ssh_user" {
-  description = "The default username to connect to the nodes.  The default AMI is AL2 so it will be set to ec2-user. If ubuntu AMI is being used change to 'ubuntu'"
-  default = "ec2-user"
+  description = "The default username to connect to the nodes.  Example: If the default AMI is AL2 so it will be set to ec2-user or if ubuntu AMI is being used change to 'ubuntu'"
 }
 
 #### VPC
@@ -43,11 +42,10 @@ variable "aws_eips" {
 }
 
 variable "os_family" {
-  description =  ""
+  description =  "Operating system family: ubuntu, rhel, or al2"
   type = string
-  default = "al2"
   validation {
-    condition = contains(["ubuntu", "al2"], var.os_family)
-    error_message = "Must be either \"ubuntu\" or \"al2\"."
+    condition = contains(["ubuntu", "al2", "rhel"], var.os_family)
+    error_message = "Must be either \"ubuntu\", \"al2\" or \"rhel\"."
   }
 }

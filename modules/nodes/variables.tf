@@ -88,13 +88,11 @@ variable "ebs-volume-size" {
   default     = "150"
 }
 
-###### AMI Defaults
+###### AMI Defaults 
 variable "re_ami_name" {
     description = "AMI name to use for nodes. "
-    default = "amzn2-ami-amd-hvm-2.0.20220606.1-x86_64-gp2"
 }
 
 variable "re_ami_owner" {
     description = "AMI Owner"
-    default = "137112412989"
 }

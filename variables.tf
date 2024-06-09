@@ -16,10 +16,6 @@ variable "ssh_key_path" {
     description = "name of ssh key to be added to instance"
 }
 
-variable "ssh_user" {
-  description = "The default username to connect to the nodes.  The default AMI is AL2 so it will be set to ec2-user. If ubuntu AMI is being used change to 'ubuntu'"
-  default = "ec2-user"
-}
 variable "owner" {
     description = "owner tag name"
 }
@@ -346,12 +342,12 @@ variable "vpc_security_group_ids" {
 }
 
 variable "os_family" {
-  description =  ""
+  description =  "Operating system family: ubuntu, rhel, or al2"
   type = string
   default = "al2"
   validation {
-    condition = contains(["ubuntu", "al2"], var.os_family)
-    error_message = "Must be either \"ubuntu\" or \"al2\"."
+    condition = contains(["ubuntu", "al2", "rhel"], var.os_family)
+    error_message = "Must be either \"ubuntu\", \"al2\" or \"rhel\"."
   }
 }
 
@@ -365,6 +361,10 @@ variable "re_ami_owner" {
     default = "137112412989"
 }
 
+variable "ssh_user" {
+  description = "The default username to connect to the nodes.  The default AMI is AL2 so it will be set to ec2-user. If ubuntu AMI is being used change to 'ubuntu'"
+  default = "ec2-user"
+}
 
 ####### Create Cluster Variables
 ####### Node and DNS outputs used to Create Cluster

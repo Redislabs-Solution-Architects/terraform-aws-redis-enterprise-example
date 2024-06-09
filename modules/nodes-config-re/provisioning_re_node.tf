@@ -66,10 +66,6 @@ resource "local_file" "playbook_setup" {
   #depends_on = [aws_instance.re_cluster_instance, aws_eip_association.re-eip-assoc, aws_volume_attachment.ephemeral_re_cluster_instance]
 }
 
-resource "local_file" "default_yaml" {
-   content = file("${path.module}/ansible/playbooks/${var.os_family}/default.yaml")
-   filename = "${path.module}/ansible/playbooks/default.yaml"
-}
 
 
 #### Generate Ansible Inventory for each node
