@@ -415,6 +415,6 @@ variable "re_databases_create" {
 }
 
 variable "re_databases_json_file" {
-    description = "Array of database objects to create using the RE REST API. Required if re_create_databases is set. (warning: no check if database already exists)"
+    description = "Array of database objects (https://redis.io/docs/latest/operate/rs/references/rest-api/objects/bdb/) to create using the RE REST API. Required if re_create_databases is set. (warning: no check if database already exists)"
     default = "./re_databases.json"
 }

@@ -1,20 +1,14 @@
-# tf-aws-redis-enterprise-cluster
+# Terraform AWS Redis Enterprise Starter
+
 Create a Redis Enterprise Cluster from scratch on AWS using Terraform.
 Redis Enterprise Cluster of 3+ nodes accessible via FQDN, username, and password.
+
 Cluster creation options to create either Redis on RAM, Redis on Flash, and or Rack Zone Aware cluster.
 
-Create an optional test node or nodes with Redis and Memtier installed.
-
- Optional: Configure Prometheus and Grafana on the Test node for advanced monitoring at the Redis Enterprise cluster, node, and database levels.
-
-* Example of deployment: (user can choose any number of RE nodes and any number of tester nodes to deploy)
-![Alt text](image/RE-TF-Deploy.jpg?raw=true "Title")
 
 ## Terraform Modules to provision the following:
 * New VPC 
 * Any number of Redis Enterprise nodes and install Redis Enterprise software (ubuntu 20.04)
-* Test node with Redis and Memtier installed
-* Prometheus and Grafana node configured for advanced monitoring
 * DNS (NS and A records for Redis Enterprise nodes)
 * Create and Join Redis Enterprise cluster
     * cluster creation options: redis on ram, redis on flash, and or rack zone awareness
@@ -30,7 +24,6 @@ Create an optional test node or nodes with Redis and Memtier installed.
 * aws-cli (aws access key and secret key)
 * terraform installed on local machine
 * ansible installed on local machine
-* VS Code
 
 #### Prerequisites (detailed instructions)
 1.  Install `aws-cli` on your local machine and run `aws configure` ([link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)) to set your access and secret key.
@@ -73,12 +66,9 @@ There are two important files to understand. `modules.tf` and `terraform.tfvars.
 * `modules.tf` contains the following: 
     - `vpc module` (creates new VPC)
     - `node module` (creates and provisions ubuntu 20.04 vms with RE software installed)
-    - `tester-nodes` (creates test nodes with Redis and Memtier installed)
-        - *If you do not want to provision tester nodes, comment this module out*
-    - `prometheus-node` (configures the test node with prometheus and grafana for advanced monitoring on the Redis Enterprise Cluster)
-        - *If you do not want to provision the prometheus and grafana node, comment this module out*
     - `dns module` (creates R53 DNS with NS record and A records), 
     - `create-cluster module` (uses ansible to create and join the RE cluster via REST API)
+    - `create-database module` (uses ansible to create databases based on configuration via REST API)
     * *the individual modules can contains inputs from previously generated from run modules.*
     - example:
     ```
