@@ -148,7 +148,7 @@ By default an Amazon Linux 2 AMI will be used.  It is possible to change the AMI
  re_download_url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/7.4.2/redislabs-7.4.2-129-amzn2-x86_64.tar"
 ```
 
-The AMI name (`re_ami_name`) along with the AMI owner (`re_ami_owner`) is provided first.  During creation of the VMs that will be used for the Redis Enterprise nodes the AMI id is looked up using these two values.  Then you need to specify the OS family which needs to match the OS of the AMI.  There are currently three options: `al2`, `rhel` or `ubuntu`. Then, you need to provide the default SSH user for the AMI. For example, typically in the Ubuntu canonical AMIs this is `ubuntu` while in Amazon Linux 2 (and Cent OS Stream 9) this is `ec2-user`.  Lastly, you need to provide a URL for downloading the Redis Enterprise package that matches the OS.
+The AMI name (`re_ami_name`) along with the AMI owner (`re_ami_owner`) is provided first.  During creation of the VMs that will be used for the Redis Enterprise nodes the AMI id is looked up using these two values.  Then you need to specify the OS family which needs to match the OS of the AMI.  There are currently three options: *al2*, *rhel* or *ubuntu*. Then, you need to provide the default SSH user (`ssh_user`) for accessing the system during provisioning. Typically in the Ubuntu AMIs this is *ubuntu* while in Amazon Linux 2 (and Cent OS Stream 9) this is *ec2-user*. You will want to be sure this is correctly, otherwise the provisioning will not work.  Lastly, you need to provide a URL (`re_download_url`) for downloading the Redis Enterprise package that matches the OS.
 
 ### Creating Databases 
 
