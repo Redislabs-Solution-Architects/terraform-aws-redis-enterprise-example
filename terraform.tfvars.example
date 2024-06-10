@@ -138,6 +138,7 @@ re_cluster_password = "admin"
 ############# Create RE Database Variables
 
 #### Create databases
+#### Enable if you wish to create databases.  If this is enabled you must make sure there is a valid re_databases_json_file.
 re_databases_create = false
 
 #### Database configurations to create. Array of database objects (https://redis.io/docs/latest/operate/rs/references/rest-api/objects/bdb/) to create using the RE REST API. Required if re_create_databases is set. (warning: no check if database already exists). The example re_databases.json.example can be saved to the default for reference.
