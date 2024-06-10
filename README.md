@@ -136,6 +136,35 @@ re-cluster-username = "admin@admin.com"
 
  ```
 
+### Changing the AMI / OS
+
+By default an Amazon Linux 2 AMI will be used.  It is possible to change the AMI being used but it should be done in combination with a few other related variables.  Let's look at the defaults for these related variables:
+
+```
+ re_ami_name = "amzn2-ami-amd-hvm-2.0.20220606.1-x86_64-gp2"
+ re_ami_owner = "137112412989"
+ os_family = "al2"
+ ssh_user = "ec2-user"
+ re_download_url = "https://s3.amazonaws.com/redis-enterprise-software-downloads/7.4.2/redislabs-7.4.2-129-amzn2-x86_64.tar"
+```
+
+The AMI name (`re_ami_name`) along with the AMI owner (`re_ami_owner`) is provided first.  During creation of the VMs that will be used for the Redis Enterprise nodes the AMI id is looked up using these two values.  Then you need to specify the OS family which needs to match the OS of the AMI.  There are currently three options: `al2`, `rhel` or `ubuntu`. Then, you need to provide the default SSH user for the AMI. For example, typically in the Ubuntu canonical AMIs this is `ubuntu` while in Amazon Linux 2 (and Cent OS Stream 9) this is `ec2-user`.  Lastly, you need to provide a URL for downloading the Redis Enterprise package that matches the OS.
+
+### Creating Databases 
+
+By default, the provisioning of database is disabled.  You don't need to use this to create databases.  Just to clarify, this can't really be for 'managing' databases. Meaning, it doesn't track the state of databases or databases configurations. This will just create databases for initial use.
+
+Enable initial database creation:
+
+`re_databases_create = true`
+
+Then, you need to set the databases JSON file.  This is the default:
+
+`re_databases_json_file = "./re_databases.json"`
+
+This is designed to be able to use the sample databases JSON.  You can copy the `re_databases.json.example` to `re_databases.json` and then change or add the configurations you want for your databases.  The JSON is an array of database objects (https://redis.io/docs/latest/operate/rs/references/rest-api/objects/bdb/).  Each database will be created using the REST API.
+
+
 ## Cleanup
 
 Remove the resources that were created.
