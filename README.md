@@ -65,7 +65,7 @@ Since creating a Redis Enterprise cluster from scratch takes many components (VP
 There are two important files to understand. `modules.tf` and `terraform.tfvars.example`.
 * `modules.tf` contains the following: 
     - `vpc module` (creates new VPC)
-    - `node module` (creates and provisions ubuntu 20.04 vms with RE software installed)
+    - `node module` (creates and provisions vms with RE software installed)
     - `dns module` (creates R53 DNS with NS record and A records), 
     - `create-cluster module` (uses ansible to create and join the RE cluster via REST API)
     - `create-database module` (uses ansible to create databases based on configuration via REST API)
