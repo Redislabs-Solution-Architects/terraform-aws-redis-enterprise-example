@@ -8,14 +8,14 @@ Cluster creation options to create either Redis on RAM, Redis on Flash, and or R
 
 ## Terraform Modules to provision the following:
 * New VPC 
-* Any number of Redis Enterprise nodes and install Redis Enterprise software (ubuntu 20.04)
+* Any number of Redis Enterprise nodes and install Redis Enterprise software 
 * DNS (NS and A records for Redis Enterprise nodes)
 * Create and Join Redis Enterprise cluster
     * cluster creation options: redis on ram, redis on flash, and or rack zone awareness
 
 ### !!!! Requirements !!!
-* Redis Enterprise Software (**Ubuntu 20.04**)
-* R53 DNS_hosted_zone_id *(if you do not have one already, go get a domain name on Route53)*
+* Redis Enterprise Software 
+* R53 DNS_hosted_zone_id *(if you do not have one already, set up a domain name on Route53)*
 * aws access key and secret key
 * an **AWS generated** SSH key for the region you are creating the cluster
     - *you must chmod 400 the key before use*
@@ -60,7 +60,7 @@ Cluster creation options to create either Redis on RAM, Redis on Flash, and or R
 ## Getting Started:
 Now that you have terraform and ansible installed you can get started provisioning your RE cluster on AWS using terraform modules.
 
-Since creating a Redis Enterprise cluster from scratch takes many components (VPC, DNS, Nodes, and creating the cluster via REST API) it is best to break these up into invidivual `terraform modules`. That way if a user already has a pre-existing VPC, they can utilize their existing VPC instead of creating a brand new one.
+Since creating a Redis Enterprise cluster from scratch takes many components (VPC, DNS, Nodes, and creating the cluster via REST API) it is best to break these up into indivual `terraform modules`. That way if a user already has a pre-existing VPC, they can utilize their existing VPC instead of creating a brand new one.
 
 There are two important files to understand. `modules.tf` and `terraform.tfvars.example`.
 * `modules.tf` contains the following: 
@@ -101,14 +101,13 @@ There are two important files to understand. `modules.tf` and `terraform.tfvars.
     - to use this file you need to change it from `terraform.tfvars.example` to simply `terraform.tfvars` then enter in your own inputs.
 
 ### Instructions for Use:
-1. Open repo in VS code
-2. Copy the variables template. or rename it `terraform.tfvars`
+1. Copy the variables template. or rename it `terraform.tfvars`
     ```bash
     cp terraform.tfvars.example terraform.tfvars
     ```
-3. Update `terraform.tfvars` variable inputs with your own inputs
+2. Update `terraform.tfvars` variable inputs with your own inputs
     - Some require user input, some will use a default value if none is given
-4. Now you are ready to go!
+3. Now you are ready to go!
     * Open a terminal in VS Code:
     ```bash
     # create virtual environment
@@ -123,7 +122,7 @@ There are two important files to understand. `modules.tf` and `terraform.tfvars.
     # Enter a value: yes
     # can take around 10 minutes to provision cluster
     ```
-5. After a successful run there should be outputs showing the FQDN of your RE cluster and the username and password. (*you may need to scroll up a little*)
+4. After a successful run there should be outputs showing the FQDN of your RE cluster and the username and password. (*you may need to scroll up a little*)
  - example output:
  ```
  Outputs:
